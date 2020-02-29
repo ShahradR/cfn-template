@@ -23,3 +23,9 @@ repos:
     hooks:
       - id: prettier
         name: Prettier
+
+  - repo: https://github.com/aws-cloudformation/cfn-python-lint
+    rev: v0.28.2
+    hooks:
+      - id: cfn-python-lint
+        files: templates/.*\.(json|yml|yaml)$
