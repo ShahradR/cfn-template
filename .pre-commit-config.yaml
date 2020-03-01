@@ -29,3 +29,11 @@ repos:
     hooks:
       - id: cfn-python-lint
         files: templates/.*\.(json|yml|yaml)$
+
+  - repo: local
+    hooks:
+      - id: dockerfile-provides-entrypoint
+        name: cfn_nag
+        language: docker_image
+        entry: stelligent/cfn_nag:latest
+        files: templates/.*\.(json|yml|yaml)$
