@@ -1,0 +1,28 @@
+---
+AWSTemplateFormatVersion: 2010-09-09
+
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retail
+    Properties:
+      LoggingConfiguration:
+        DestinationBucketName: s3://log-bucket
+        LogFilePrefix: s3-log-
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+  S3Policy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket:
+        Ref: S3Bucket
+      PolicyDocument:
+        Statement:
+          - Action:
+              - s3:GetObject
+            Effect: Allow
+            Resource: arn:aws:s3:::s3Bucket/*
+            Principal:
+              AWS: arn:aws:iam:1234567890:root
